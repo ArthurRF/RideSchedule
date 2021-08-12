@@ -1,0 +1,39 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.1.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Ride {
+  id                      String     @id
+  name                    String
+  start_date              DateTime
+  start_date_registration DateTime   @default(now())
+  end_date_registration   DateTime
+  additional_information  String?
+  start_place             String
+  participants_limit      Int?
+  RideUser                RideUser[]
+}
+
+model RideUser {
+  ride_id           String
+  user_id           String
+  subscription_date DateTime
+  Ride              Ride     @relation(fields: [ride_id], references: [id])
+  User              User     @relation(fields: [user_id], references: [id])
+
+  @@id([ride_id, user_id])
+}
+
+model User {
+  id       String     @id
+  name     String?
+  email    String     @unique
+  password String
+  RideUser RideUser[]
+}
