@@ -23,7 +23,7 @@ model Ride {
 model RideUser {
   ride_id           String
   user_id           String
-  subscription_date DateTime
+  subscription_date DateTime @default(now())
   Ride              Ride     @relation(fields: [ride_id], references: [id])
   User              User     @relation(fields: [user_id], references: [id])
 

@@ -1,5 +1,5 @@
-import { PrismaClient, Ride } from "@prisma/client";
-import { ICreateRideDTO } from "../dtos/ICreateRideDTO";
+import { PrismaClient } from "@prisma/client";
+import { ICreateRideDTO } from "../../dtos/ICreateRideDTO";
 import { v4 as uuidv4 } from 'uuid';
 
 class CreateRideUseCase {
@@ -26,12 +26,6 @@ class CreateRideUseCase {
         participants_limit: participants_limit
       }
     });
-
-    // await prisma.rideUser.create({
-    //   data: {
-    //     ride_id: 
-    //   }
-    // });
   }
 }
 
